@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: cu_puppy_husky_lit_mt
-  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 6f6f9a6da09a049d18e6a445aad05e71, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -23,6 +23,9 @@ Material:
         m_Texture: {fileID: 2800000, guid: 165cb0aa5dc99874485dc8583f8f9c1b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats: []
+    m_Floats:
+    - _ExtrudeSize: 0.05
+    - _WaveSize: 1
+    - _WaveSpeed: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
