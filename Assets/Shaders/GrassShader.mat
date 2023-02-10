@@ -25,5 +25,5 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - _GrassColor: {r: 0.21337666, g: 0.33018863, b: 0.3301887, a: 1}
+    - _GrassColor: {r: 0.27754536, g: 0.5943396, b: 0.5943396, a: 1}
     - _GrassColour: {r: 0.05562477, g: 0.4716981, b: 0.107257575, a: 1}
