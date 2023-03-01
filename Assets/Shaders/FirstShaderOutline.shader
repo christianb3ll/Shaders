@@ -1,11 +1,12 @@
-﻿Shader "Custom/FirstShader"
+﻿Shader "Custom/FirstShaderOutline"
 {
     Properties
     {
-        _BubbleColor("Bubble Colour", Color) = (0.5,0.7,0.9,1)
         _WaveSize("Wave Size", range(0,5)) = 0.5
         _WaveSpeed("Wave Speed", range(0,10)) = 1.0
         _ExtrudeSize("Extrude Size", range(0,5)) = 0.1
+        _OutlineColor("Outline Colour", Color) = (1,1,1,1)
+        _OutlineSize("Outline Size", range(0,5)) = 0
     }
     SubShader
     {
@@ -14,6 +15,8 @@
 
         Pass
         {
+
+            Cull Front
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -23,20 +26,20 @@
             struct Attributes
             {
                 float4 vertex : POSITION;
-                float4 positionOS : POSITION;
                 float4 normal : NORMAL;
             };
 
             struct Varyings
             {
                 float4 vertex : SV_POSITION;
-                float4 positionOS : POSITION1;
             };
 
-            fixed4 _BubbleColor;
             float _WaveSize;
             float _WaveSpeed;
             float _ExtrudeSize;
+            fixed4 _OutlineColor;
+            float _OutlineSize;
+
 
             Varyings vert (Attributes IN)
             {
@@ -50,12 +53,7 @@
                 // Extrude the normals 
                 OUT.vertex += IN.normal * _ExtrudeSize;
 
-                // Convert the vertices to clip space
-                OUT.vertex = UnityObjectToClipPos(OUT.vertex);
-                
-
-                // setup position in object space for fragment shader 
-                OUT.positionOS = IN.positionOS;
+                OUT.vertex = UnityObjectToClipPos(OUT.vertex * _OutlineSize);
 
                 // Causes the bubbles to rise and fall
                 OUT.vertex.y -= sin(_Time.y / 5) *10;
@@ -65,18 +63,11 @@
 
             fixed4 frag (Varyings inp) : SV_Target
             {
-                // sample the texture
-                half4 col = _BubbleColor;
-
-                // Add horizontal shimmer lines
-                if(fmod( (0.5* sin(inp.positionOS.x +0.5 *_Time.y)+1) * 10, 2) > 0.2 )
-                {
-                    col.xyz -= 0.2;
-                }
-
-                return col;
+                return _OutlineColor;
             }
             ENDCG
         }
+
+        
     }
 }

@@ -80,9 +80,13 @@
                 for (int i=0; i < lightCount; i++){
                     Light light = GetAdditionalLight(i, inp.positionHCS);
                     float4 nl = max(0, dot(inp.normalWS.xyz, light.direction.xyz));
-                    diffuse += float4(nl * light.color, 1);
-                }
 
+                 
+
+                    diffuse += float4(nl * light.color, 1);
+                    
+                }
+      
                 // add in the ambient term (a uniform variable) 
                 float lighting = diffuse + _AmbientLight * lightIntensity;
 

@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader FX Waves
-  m_Shader: {fileID: 4800000, guid: 82811cdb9698ebd44861b4a0d5aee480, type: 3}
+  m_Name: FirstShaderOutline
+  m_Shader: {fileID: 4800000, guid: 95da7af34bbab408792950e2d8e4f4f5, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,12 +20,10 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - _ColorEnd: 0.517
-    - _ColorStart: 0.173
-    - _Offset: 0
-    - _Scale: 1
-    - _Value: 1
+    - _ExtrudeSize: 0.63
+    - _OutlineSize: 0.75
+    - _WaveSize: 0.77
+    - _WaveSpeed: 7.07
     m_Colors:
-    - _Color: {r: 0.8962264, g: 0.24096651, b: 0.24096651, a: 1}
-    - _ColorA: {r: 0.4, g: 0.8117647, b: 0.5403424, a: 1}
-    - _ColorB: {r: 0, g: 0, b: 0, a: 1}
+    - _BubbleColor: {r: 0.5, g: 0.7, b: 0.9, a: 1}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
