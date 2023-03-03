@@ -75,10 +75,10 @@
                 // Normalise the view direction
                 float3 viewDir = normalize(inp.viewDirection);
 
-                float3 halfVector = normalize(_MainLightPosition + viewDir);
-                float NdotH = dot(inp.normalWS, halfVector);
+                float3 midPoint = normalize(_MainLightPosition + viewDir);
+                float NdotMid = dot(inp.normalWS, midPoint);
 
-                float specularIntensity = pow(NdotH, _Glossiness);
+                float specularIntensity = pow(NdotMid, _Glossiness);
 
                 float4 specular = specularIntensity * _HighlightColor;
 
@@ -89,10 +89,10 @@
                 float4 nl = max(0, dot(inp.normalWS.xyz, mainLight.direction.xyz));
 
                 // Clamp the light intensity
-                // float lightIntensity = nl > 0 ? 1 : 0;
+                float lightIntensity = nl > 0 ? 1 : 0;
 
                 // calculate the diffuse based on nl
-                float diffuse = float4(nl * mainLight.color, 1);
+                float lighting = float4((lightIntensity + _AmbientLight + specular) * mainLight.color, 1);
 
                 // repeat for all of the other lights 
                 int lightCount = GetAdditionalLightsCount();
@@ -100,19 +100,18 @@
                     Light light = GetAdditionalLight(i, inp.positionWS);
                     float4 nl = max(0, dot(inp.normalWS.xyz, light.direction.xyz));
 
-                    float3 halfVector = normalize(light.direction.xyz + viewDir);
-                    float NdotH = dot(inp.normalWS, halfVector);
+                    float3 midPoint = normalize(light.direction.xyz + viewDir);
+                    float NdotMid = dot(inp.normalWS, midPoint);
 
-                    float specularIntensity = pow(NdotH, _Glossiness);
+                    float specularIntensity = pow(NdotMid, _Glossiness);
 
                     specular += specularIntensity * _HighlightColor;
 
-                    diffuse += float4(nl * light.color, 1);
+                    float lightIntensity = nl > 0 ? 1 : 0;
+
+                    lighting += float4((_AmbientLight + lightIntensity + specular) * light.color, 1);
                 }
       
-                // add in the ambient term (a uniform variable)
-                float lighting = diffuse + _AmbientLight + specular;
-
                 // multiply the lighting by the object colour
                 return _Color * lighting;
               
