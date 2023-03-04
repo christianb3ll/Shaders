@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/LightingShader.unity
-    guid: ff6301a658d894749a10f788db44cb9d
+    path: Assets/Scenes/TextureShader.unity
+    guid: ff84f301ff343465fb718daeb4956d53
   m_configObjects: {}
